@@ -15,7 +15,7 @@ function Header({ text, bgColor }) {
 }
 
 // Type of props that can be passed to 'Header' component.
-Header.protoTypes = {
+Header.propTypes = {
     text: PropTypes.string,
     bgColor: PropTypes.string,
 }
