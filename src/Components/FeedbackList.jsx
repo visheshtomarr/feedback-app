@@ -1,7 +1,7 @@
 import FeedbackItem from "./FeedbackItem";
 import PropTypes from 'prop-types';
 
-function FeedbackList({ feedback }) {
+function FeedbackList({ feedback, handleDelete }) {
     // If there is no feedback or the feedback array's lenght is zero, we return "No Feedback yet!"
     if (!feedback || feedback.length === 0) {
         return <p>No Feeback yet!</p>;
@@ -10,7 +10,11 @@ function FeedbackList({ feedback }) {
     return (
         <div className="feedback-list">
             {feedback.map((feedbackItem) => (
-                <FeedbackItem key={feedbackItem.id} item={feedbackItem} />
+                <FeedbackItem 
+                    key={feedbackItem.id} 
+                    item={feedbackItem}
+                    handleDelete={handleDelete}
+                 />
             ))}
         </div>
     )
