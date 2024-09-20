@@ -3,11 +3,25 @@ import Button from "./shared/Button";
 import { useState } from "react";
 
 function FeedbackForm() {
-    // Declaring Review text state and set-state methods.
+    // Declaring state and set-state methods.
     const [reviewText, setReviewText] = useState('');
+    const [btnDisabled, setBtnDisabled] = useState(true);
+    const [validationMessage, setValidationMessage] = useState('');
 
     // Onchange function for handling change in review text.
     const handleReviewTextChange = (e) => {
+        if (reviewText === '') {
+            setBtnDisabled(true);
+            setValidationMessage(null);
+        }
+        else if (reviewText !== '' && reviewText.trim().length < 9) {
+            setValidationMessage("Review must be atleast 10 characters");
+            setBtnDisabled(true);
+        }
+        else {
+            setBtnDisabled(false);
+            setValidationMessage(null);
+        }
         setReviewText(e.target.value);
     }
 
@@ -22,8 +36,9 @@ function FeedbackForm() {
                         onChange={handleReviewTextChange}
                         value={reviewText}
                     />
-                    <Button type="submit">Send</Button>
+                    <Button type="submit" isDisabled={btnDisabled}>Send</Button>
                 </div>
+                {validationMessage && <div className="message">{validationMessage}</div>}
             </form>
         </Card>
     )
