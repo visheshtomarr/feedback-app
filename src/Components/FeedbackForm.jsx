@@ -1,4 +1,5 @@
 import Card from "./shared/Card";
+import Button from "./shared/Button";
 import { useState } from "react";
 
 function FeedbackForm() {
@@ -21,7 +22,7 @@ function FeedbackForm() {
                         onChange={handleReviewTextChange}
                         value={reviewText}
                     />
-                    <button type="submit">Send</button>
+                    <Button type="submit">Send</Button>
                 </div>
             </form>
         </Card>

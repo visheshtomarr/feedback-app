@@ -19,7 +19,7 @@ function App() {
 
     return (
         <>
-            <Header text="Feedback UI" bgColor="hsl(238, 35%, 15%)" />
+            <Header />
             <div className="container">
                 <FeedbackForm />
                 <FeedbackStats feedback={feedback} />

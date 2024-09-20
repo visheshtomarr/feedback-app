@@ -4,7 +4,7 @@ import Card from "./shared/Card";
 
 function FeedbackItem({ item, handleDelete }) {
     return (
-        <Card reverse={false}>
+        <Card>
             <div className="num-display">{item.rating}</div>
             <button onClick={() => handleDelete(item.id)} className="close">
                 <FaTimes color='#202142' />
@@ -13,6 +13,8 @@ function FeedbackItem({ item, handleDelete }) {
         </Card>
     )
 }
+
+
 
 FeedbackItem.propTypes = {
     item: PropTypes.object.isRequired,
