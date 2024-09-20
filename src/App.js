@@ -3,6 +3,7 @@ import Header from "./Components/Header.jsx";
 import FeedbackStats from "./Components/FeedbackStats.jsx";
 import FeedbackList from "./Components/FeedbackList.jsx";
 import FeedbackData from "./data/FeedbackData";
+import FeedbackForm from "./Components/FeedbackForm.jsx";
 
 function App() {
     // Declaring 'App' level state and set-state method for FeedbackData.
@@ -20,6 +21,7 @@ function App() {
         <>
             <Header text="Feedback UI" bgColor="hsl(238, 35%, 15%)" />
             <div className="container">
+                <FeedbackForm />
                 <FeedbackStats feedback={feedback} />
                 <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
             </div>
