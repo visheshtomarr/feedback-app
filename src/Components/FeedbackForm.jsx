@@ -1,11 +1,13 @@
 import Card from "./shared/Card";
 import Button from "./shared/Button";
+import RatingSelect from "./RatingSelect";
 import { useState } from "react";
 
 function FeedbackForm() {
     // Declaring state and set-state methods.
     const [reviewText, setReviewText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
+    const [rating, setRating] = useState(10);
     const [validationMessage, setValidationMessage] = useState('');
 
     // Onchange function for handling change in review text.
@@ -29,6 +31,7 @@ function FeedbackForm() {
         <Card>
             <form>
                 <h2>How much would you rate our services?</h2>
+                <RatingSelect select={(rating) => setRating(rating)} />
                 <div className="input-group">
                     <input 
                         type="text" 
