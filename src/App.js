@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header.jsx";
 import FeedbackStats from "./Components/FeedbackStats.jsx";
 import FeedbackList from "./Components/FeedbackList.jsx";
 import FeedbackData from "./data/FeedbackData";
 import FeedbackForm from "./Components/FeedbackForm.jsx";
-import { v4 as uuidv4 } from 'uuid';
+import AboutPage from "./Pages/AboutPage.jsx";
+
 
 function App() {
     // Declaring 'App' level state and set-state method for FeedbackData.
@@ -27,14 +30,25 @@ function App() {
     }
 
     return (
-        <>
+        <Router>
             <Header />
             <div className="container">
-                <FeedbackForm handleAdd={addFeedback}/>
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+                <Routes>
+                    <Route 
+                        exact 
+                        path="/"
+                        element={
+                            <>
+                                <FeedbackForm handleAdd={addFeedback}/>
+                                <FeedbackStats feedback={feedback} />
+                                <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+                            </>
+                        }
+                    />
+                    <Route path="/about" element={ <AboutPage /> } />
+                </Routes>
             </div>
-        </>
+        </Router>
     )
 }
 
