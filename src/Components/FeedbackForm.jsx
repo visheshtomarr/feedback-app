@@ -3,7 +3,7 @@ import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 import { useState } from "react";
 
-function FeedbackForm() {
+function FeedbackForm({ handleAdd }) {
     // Declaring state and set-state methods.
     const [reviewText, setReviewText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
@@ -27,9 +27,22 @@ function FeedbackForm() {
         setReviewText(e.target.value);
     }
 
+    // OnSubmit function to create a new feedback when user submits the form.
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (reviewText.trim().length > 10) {
+            const newFeedback = {
+                text: reviewText,
+                rating,
+            };
+            handleAdd(newFeedback);
+            setReviewText('');
+        }
+    }
+
     return (
         <Card>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h2>How much would you rate our services?</h2>
                 <RatingSelect select={(rating) => setRating(rating)} />
                 <div className="input-group">
