@@ -1,14 +1,19 @@
+import { useState } from "react";
+import { useContext } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
-import { useState } from "react";
+import FeedbackContext from "../Context/FeedbackContext";
 
-function FeedbackForm({ handleAdd }) {
+function FeedbackForm() {
     // Declaring state and set-state methods.
     const [reviewText, setReviewText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [rating, setRating] = useState(10);
     const [validationMessage, setValidationMessage] = useState('');
+
+    // Catch the function to add a feedback using FeedbackContext.
+    const {addFeedback} = useContext(FeedbackContext);
 
     // Onchange function for handling change in review text.
     const handleReviewTextChange = (e) => {
@@ -32,10 +37,10 @@ function FeedbackForm({ handleAdd }) {
         e.preventDefault();
         if (reviewText.trim().length > 10) {
             const newFeedback = {
-                text: reviewText,
                 rating,
+                text: reviewText,
             };
-            handleAdd(newFeedback);
+            addFeedback(newFeedback);
             setReviewText('');
         }
     }

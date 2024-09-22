@@ -3,7 +3,7 @@ import { useContext } from "react";
 import FeedbackItem from "./FeedbackItem";
 import FeedbackContext from "../Context/FeedbackContext";
 
-function FeedbackList({ handleDelete }) {
+function FeedbackList() {
     // Create feedback object from FeedbackContext instead of prop.
     const {feedback} = useContext(FeedbackContext);
 
@@ -26,7 +26,6 @@ function FeedbackList({ handleDelete }) {
                     <FeedbackItem 
                         key={feedbackItem.id} 
                         item={feedbackItem}
-                        handleDelete={handleDelete}
                     />
                 </motion.div>
             ))}
