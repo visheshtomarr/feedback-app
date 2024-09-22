@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
@@ -12,8 +11,8 @@ function FeedbackForm() {
     const [rating, setRating] = useState(10);
     const [validationMessage, setValidationMessage] = useState('');
 
-    // Catch the function to add a feedback using FeedbackContext.
-    const {addFeedback} = useContext(FeedbackContext);
+    // Catch fields present inside the feedback object from FeedbackContext.
+    const {addFeedback, feedbackEdit} = useContext(FeedbackContext);
 
     // Onchange function for handling change in review text.
     const handleReviewTextChange = (e) => {
@@ -44,6 +43,18 @@ function FeedbackForm() {
             setReviewText('');
         }
     }
+
+    // Effect for clicking the edit button.
+    useEffect(() => {
+        if(feedbackEdit.edit === true) {
+            setBtnDisabled(false);
+            setReviewText(feedbackEdit.item.text);
+            setRating(feedbackEdit.item.rating);
+        }
+    },
+    // Whenever the state of any item in this array changes, the side of effect
+    // of that change can be shown through useEffect(). 
+    [feedbackEdit]);
 
     return (
         <Card>

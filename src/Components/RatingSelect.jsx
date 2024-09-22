@@ -1,7 +1,17 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react";
+import FeedbackContext from "../Context/FeedbackContext";
 
 function RatingSelect({ select }) {
+    // Declare selected radio button state and set-state methods.
     const [selected, setSelected] = useState();
+
+    // Catch the FeedbackEdit from the FeedbackContext.
+    const {feedbackEdit} = useContext(FeedbackContext);
+
+    // Effect for showing the rating of an item while in edit mode.
+    useEffect(() => {
+      setSelected(feedbackEdit.item.rating);
+    }, [feedbackEdit])
 
     const handleChange = (e) => {
         setSelected(+e.currentTarget.value);
@@ -114,4 +124,4 @@ function RatingSelect({ select }) {
     );
 }
 
-export default RatingSelect
+export default RatingSelect;

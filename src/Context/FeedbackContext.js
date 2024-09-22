@@ -61,7 +61,9 @@ export const FeedbackProvider = ({ children }) => {
                 feedback,
                 deleteFeedback,
                 addFeedback,
-                editFeedback
+                editFeedback,
+                // State that consists of the feedback item to be edited.
+                feedbackEdit
             }}>
             {children}
         </FeedbackContext.Provider>
