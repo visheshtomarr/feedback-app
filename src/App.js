@@ -8,6 +8,7 @@ import FeedbackData from "./data/FeedbackData";
 import FeedbackForm from "./Components/FeedbackForm.jsx";
 import AboutPage from "./Pages/AboutPage.jsx";
 import AboutIconLink from "./Components/AboutIconLink.jsx";
+import { FeedbackProvider } from "./Context/FeedbackContext.js";
 
 
 function App() {
@@ -31,26 +32,28 @@ function App() {
     }
 
     return (
-        <Router>
-            <Header />
-            <div className="container">
-                <Routes>
-                    <Route 
-                        exact 
-                        path="/"
-                        element={
-                            <>
-                                <FeedbackForm handleAdd={addFeedback}/>
-                                <FeedbackStats feedback={feedback} />
-                                <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-                            </>
-                        }
-                    />
-                    <Route path="/about" element={ <AboutPage /> } />
-                </Routes>
-                <AboutIconLink />
-            </div>
-        </Router>
+        <FeedbackProvider>
+            <Router>
+                <Header />
+                <div className="container">
+                    <Routes>
+                        <Route 
+                            exact 
+                            path="/"
+                            element={
+                                <>
+                                    <FeedbackForm handleAdd={addFeedback}/>
+                                    <FeedbackStats feedback={feedback} />
+                                    <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+                                </>
+                            }
+                        />
+                        <Route path="/about" element={ <AboutPage /> } />
+                    </Routes>
+                    <AboutIconLink />
+                </div>
+            </Router>
+        </FeedbackProvider>
     )
 }
 
