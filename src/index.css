@@ -144,6 +144,10 @@ input:focus {
 .edit {
   right: 40px;
 }
+.close:hover, .edit:hover{
+  transform: scale(1.2);
+  transition-duration: 0.2s;
+}
 
 .btn {
   color: #fff;

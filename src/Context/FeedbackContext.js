@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
+    // Declare global feedback state object and set-state method.
     const [feedback, setFeedback] = useState([
         {
             id: 1,
@@ -21,6 +22,22 @@ export const FeedbackProvider = ({ children }) => {
             text: 'This is third feedback.',
         }
     ])
+
+    // Declare global feedback edit function and set-state method.
+    const [feedbackEdit, setFeedbackEdit] = useState({
+        // The default states consist of an empty feedback item and an 'edit' boolean
+        // which will be set to true when the edit button is clicked.
+        item: {},
+        edit: false
+    })
+
+    // Function to edit a feedback.
+    const editFeedback = (item) => {
+        setFeedbackEdit({
+            item,
+            edit: true,
+        })
+    }
 
     // Function to delete feedback.
     const deleteFeedback = (id) => {
@@ -44,6 +61,7 @@ export const FeedbackProvider = ({ children }) => {
                 feedback,
                 deleteFeedback,
                 addFeedback,
+                editFeedback
             }}>
             {children}
         </FeedbackContext.Provider>
