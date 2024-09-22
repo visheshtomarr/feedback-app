@@ -12,7 +12,7 @@ function FeedbackForm() {
     const [validationMessage, setValidationMessage] = useState('');
 
     // Catch fields present inside the feedback object from FeedbackContext.
-    const {addFeedback, feedbackEdit} = useContext(FeedbackContext);
+    const {addFeedback, feedbackEdit, updateFeedback} = useContext(FeedbackContext);
 
     // Onchange function for handling change in review text.
     const handleReviewTextChange = (e) => {
@@ -39,7 +39,15 @@ function FeedbackForm() {
                 rating,
                 text: reviewText,
             };
-            addFeedback(newFeedback);
+
+            // If the 'edit' field is true for any feedback item, we update
+            // the feedback list, or else, we add a new feedback upon clicking
+            // the 'Send' button.
+            if (feedbackEdit.edit === true) {
+                updateFeedback(feedbackEdit.item.id, newFeedback);
+            } else {
+                addFeedback(newFeedback);
+            }
             setReviewText('');
         }
     }

@@ -39,6 +39,17 @@ export const FeedbackProvider = ({ children }) => {
         })
     }
 
+    // Function to update the feedbacks list.
+    const updateFeedback = (id, updatedItem) => {
+        // console.log(id, updatedItem);
+        // If the id of the feedback we were trying to edit matches the
+        // id of an item present the feedback list, then, we update the 
+        // 'text' and 'rating' of that item to the 'text' and 'rating' present
+        // in the updatedItem coming from the FeedbackForm component. 
+        setFeedback(feedback.map((item) => item.id === id ? { ...item, 
+            ...updatedItem } : item ));
+    }
+
     // Function to delete feedback.
     const deleteFeedback = (id) => {
         if(window.confirm("Are you sure you want to delete?")) {
@@ -59,11 +70,12 @@ export const FeedbackProvider = ({ children }) => {
         <FeedbackContext.Provider 
             value={{ 
                 feedback,
+                // State that consists of the feedback item to be edited.
+                feedbackEdit,
                 deleteFeedback,
                 addFeedback,
                 editFeedback,
-                // State that consists of the feedback item to be edited.
-                feedbackEdit
+                updateFeedback
             }}>
             {children}
         </FeedbackContext.Provider>
