@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
@@ -28,8 +27,8 @@ export const FeedbackProvider = ({ children }) => {
     // Function to fetch data from the 'db.json' backend server.
     const fetchFeedback = async () => {
         const response = await fetch(
-            // Fetch the data in sorted ascending order with respect to 'id'.
-            "http://localhost:5000/feedback?_sort=id&_order=asc"
+            // Fetch the data in sorted descending order with respect to 'id'.
+            "/feedback?_sort=id&_order=desc"
         );
         const data = await response.json();
         
@@ -72,11 +71,19 @@ export const FeedbackProvider = ({ children }) => {
     }
 
     // Function to add a new feedback.
-    const addFeedback = (newFeedback) => {
-        // This will generate a random id for every new feedback we create.
-        newFeedback.id = uuidv4();
+    const addFeedback = async (newFeedback) => {
+        const response = await fetch("/feedback", {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newFeedback)
+        });
+
+        const data = await response.json();
+
         // We will use whatever feedbacks were already present in the state and add our new feedback.
-        setFeedback([newFeedback, ...feedback]);
+        setFeedback([data, ...feedback]);
     }
 
     return (
