@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function AboutPage() {
     return (
-        <Card>
+        <Card reverse={false}>
             <div className="about">
                 <h1>About this Project:</h1>
                 <p>This is a React app to provide feedback for a product or service.</p>

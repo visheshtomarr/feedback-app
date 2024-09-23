@@ -14,11 +14,6 @@ function Header({ text, bgColor }) {
     )
 }
 
-Header.defaultProps = {
-    text: 'Feedback UI',
-    bgColor: 'hsl(238, 35%, 15%)',
-}
-
 // Type of props that can be passed to 'Header' component.
 Header.propTypes = {
     text: PropTypes.string,

@@ -80,7 +80,7 @@ function FeedbackForm() {
                         onChange={handleReviewTextChange}
                         value={reviewText}
                     />
-                    <Button type="submit" isDisabled={btnDisabled}>
+                    <Button type="submit" isDisabled={btnDisabled} version="primary">
                         Send
                     </Button>
                 </div>

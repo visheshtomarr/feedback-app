@@ -12,7 +12,7 @@ function App() {
     return (
         <FeedbackProvider>
             <Router>
-                <Header />
+                <Header text="Feedback UI" bgColor= "hsl(238, 35%, 15%)" />
                 <div className="container">
                     <Routes>
                         <Route 
