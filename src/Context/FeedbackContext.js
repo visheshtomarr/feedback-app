@@ -1,27 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
+    // Declare loading state and set-state method.
+    const [isLoading, setIsLoading] = useState(true);
+
     // Declare global feedback state object and set-state method.
-    const [feedback, setFeedback] = useState([
-        {
-            id: 1,
-            rating: 10,
-            text: 'This is first feedback.',
-        },
-        {
-            id: 2,
-            rating: 8,
-            text: 'This is second feedback.',
-        },
-        {
-            id: 3,
-            rating: 9,
-            text: 'This is third feedback.',
-        }
-    ])
+    const [feedback, setFeedback] = useState([]);
 
     // Declare global feedback edit function and set-state method.
     const [feedbackEdit, setFeedbackEdit] = useState({
@@ -30,6 +17,25 @@ export const FeedbackProvider = ({ children }) => {
         item: {},
         edit: false
     })
+
+    // Fetch data from the 'db.json' backend server.
+    // The dependency array is empty as we only want this action to take place
+    // once when the page loads.
+    useEffect(() => {
+        fetchFeedback()
+    }, [])
+
+    // Function to fetch data from the 'db.json' backend server.
+    const fetchFeedback = async () => {
+        const response = await fetch(
+            // Fetch the data in sorted ascending order with respect to 'id'.
+            "http://localhost:5000/feedback?_sort=id&_order=asc"
+        );
+        const data = await response.json();
+        
+        setFeedback(data);
+        setIsLoading(false);
+    }
 
     // Function to edit a feedback.
     const editFeedback = (item) => {
@@ -79,6 +85,8 @@ export const FeedbackProvider = ({ children }) => {
                 feedback,
                 // State that consists of the feedback item to be edited.
                 feedbackEdit,
+                // Could be used in any feedback item while it loads.
+                isLoading,
                 deleteFeedback,
                 addFeedback,
                 editFeedback,
