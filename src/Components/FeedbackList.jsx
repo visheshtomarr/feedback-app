@@ -2,18 +2,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useContext } from "react";
 import FeedbackItem from "./FeedbackItem";
 import FeedbackContext from "../Context/FeedbackContext";
+import Spinner from "./shared/Spinner";
 
 function FeedbackList() {
     // Create feedback object from FeedbackContext instead of prop.
-    const {feedback} = useContext(FeedbackContext);
+    const {feedback, isLoading} = useContext(FeedbackContext);
 
     // If there is no feedback or the feedback array's lenght is zero, we return "No Feedback yet!"
-    if (!feedback || feedback.length === 0) {
+    if (!isLoading && (!feedback || feedback.length === 0)) {
         return <p>No Feeback yet!</p>;
     }
 
     // Feedback list with fade-in and fade-out animation.
-    return (
+    return isLoading ? (
+        <Spinner />
+    ) : (
         <div className="feedback-list">
             <AnimatePresence>
             {feedback.map((feedbackItem) => (
