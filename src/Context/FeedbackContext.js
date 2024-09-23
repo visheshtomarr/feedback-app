@@ -58,11 +58,9 @@ export const FeedbackProvider = ({ children }) => {
 
         // console.log(id, updatedItem);
         // If the id of the feedback we were trying to edit matches the
-        // id of an item present the feedback list, then, we update the 
-        // 'text' and 'rating' of that item to the 'text' and 'rating' present
-        // in the updatedItem coming from the FeedbackForm component. 
-        setFeedback(feedback.map((item) => item.id === id ? { ...item, 
-            ...data } : item ));
+        // id of an item present the feedback list, then, we update the data
+        // we are fetching from the json-server. 
+        setFeedback(feedback.map((item) => item.id === id ?  data : item ));
         
         // Reset the state of feedbackEdit after we have edited a feedback,
         // so that we can add a new feedback. 

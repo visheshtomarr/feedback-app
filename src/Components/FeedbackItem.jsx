@@ -7,7 +7,7 @@ import FeedbackContext from '../Context/FeedbackContext';
 
 function FeedbackItem({ item }) {
     // Catch the function to delete/edit a feedback using FeedbackContext.
-    const {deleteFeedback, editFeedback} = useContext(FeedbackContext);
+    const { deleteFeedback, editFeedback } = useContext(FeedbackContext);
 
     return (
         <Card>

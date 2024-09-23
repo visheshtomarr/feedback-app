@@ -16,9 +16,9 @@
       "text": "This is feedback item 3 coming from the json server"
     },
     {
-      "rating": 8,
-      "text": "This is the updated version of new test feedback",
-      "id": "bc2b"
+      "id": "df9f",
+      "text": "This is a new feedback.",
+      "rating": 8
     }
   ]
 }
