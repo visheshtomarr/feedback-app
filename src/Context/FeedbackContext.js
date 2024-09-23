@@ -48,6 +48,13 @@ export const FeedbackProvider = ({ children }) => {
         // in the updatedItem coming from the FeedbackForm component. 
         setFeedback(feedback.map((item) => item.id === id ? { ...item, 
             ...updatedItem } : item ));
+        
+        // Reset the state of feedbackEdit after we have edited a feedback,
+        // so that we can add a new feedback. 
+        setFeedbackEdit({
+            item: {},
+            edit: false,
+        })
     }
 
     // Function to delete feedback.
