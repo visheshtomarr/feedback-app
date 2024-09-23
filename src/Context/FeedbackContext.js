@@ -45,14 +45,24 @@ export const FeedbackProvider = ({ children }) => {
     }
 
     // Function to update the feedbacks list.
-    const updateFeedback = (id, updatedItem) => {
+    const updateFeedback = async (id, updatedItem) => {
+        const response = await fetch(`/feedback/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedItem)
+        });
+
+        const data = await response.json();
+
         // console.log(id, updatedItem);
         // If the id of the feedback we were trying to edit matches the
         // id of an item present the feedback list, then, we update the 
         // 'text' and 'rating' of that item to the 'text' and 'rating' present
         // in the updatedItem coming from the FeedbackForm component. 
         setFeedback(feedback.map((item) => item.id === id ? { ...item, 
-            ...updatedItem } : item ));
+            ...data } : item ));
         
         // Reset the state of feedbackEdit after we have edited a feedback,
         // so that we can add a new feedback. 
@@ -63,8 +73,12 @@ export const FeedbackProvider = ({ children }) => {
     }
 
     // Function to delete feedback.
-    const deleteFeedback = (id) => {
+    const deleteFeedback = async (id) => {
         if(window.confirm("Are you sure you want to delete?")) {
+            await fetch(`/feedback/${id}`, {
+                method: 'DELETE'
+            });
+
             // Filters the 'Feedback' array and removes the item that has 'id'.
             setFeedback(feedback.filter((item) => item.id !== id));
         }
